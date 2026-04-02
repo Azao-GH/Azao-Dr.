@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>阿皂医生 · 糖尿病精准诊疗 | 科技赋能 · 逆转未来</title>
+    <!-- 引入现代字体与图标库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #03070f;
+            font-family: 'Inter', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #eef5ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* 炫酷背景动画网格 + 光晕 */
+        .bg-cyber {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, #0a1620, #010408);
+        }
+
+        .bg-cyber::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .bg-cyber::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 70% 40%, rgba(0, 180, 255, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 导航栏 —— 玻璃态科技感 */
+        .glass-nav {
+            backdrop-filter: blur(16px);
+            background: rgba(8, 28, 48, 0.65);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.25);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 30px;
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00e0ff, #a0f0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-size: 1rem;
+            background: none;
+            color: #4cc9f0;
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #cceeff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #00f2ff;
+            border-bottom-color: #00e0ff;
+            text-shadow: 0 0 5px #00e0ff80;
+        }
+
+        /* 按钮样式 */
+        .btn-glow {
+            background: linear-gradient(95deg, #00a6c4, #0077b6);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: white;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 0 12px rgba(0, 200, 255, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-glow:hover {
+            transform: scale(1.02);
+            background: linear-gradient(95deg, #00b7d6, #0088c7);
+            box-shadow: 0 0 20px #00ccff;
+        }
+
+        .btn-outline-cyber {
+            background: transparent;
+            border: 1.5px solid #00ccff;
+            border-radius: 60px;
+            padding: 10px 28px;
+            font-weight: 600;
+            color: #00e0ff;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline-cyber:hover {
+            background: #00ccff20;
+            box-shadow: 0 0 12px #00ccff;
+        }
+
+        /* hero 区域 */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 60px 0 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-left .badge-flex {
+                justify-content: center;
+            }
+        }
+
+        .hero-left h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(125deg, #ffffff, #7ad0ff, #00ccff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-left .tagline {
+            font-size: 1.25rem;
+            color: #bbddff;
+            margin-bottom: 30px;
+            border-left: 4px solid #0af;
+            padding-left: 20px;
+        }
+
+        .badge-flex {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .tech-badge {
+            background: rgba(0, 200, 255, 0.12);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .hero-right {
+            background: rgba(12, 35, 55, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            border: 1px solid rgba(0, 220, 250, 0.3);
+            padding: 30px;
+            box-shadow: 0 25px 45px -20px #000;
+        }
+
+        .glow-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00e0ff;
+        }
+
+        .digital-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* 核心模块卡片网格 */
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 60px 0 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #00e0ff, transparent);
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .tech-card {
+            background: rgba(8, 28, 48, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            padding: 30px 28px;
+            transition: 0.25s;
+            box-shadow: 0 12px 30px -10px #00000050;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            border-color: #0af;
+            box-shadow: 0 20px 40px -12px #00a6ff30;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00e0ff;
+        }
+
+        .tech-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .tech-card p {
+            color: #bfd9ff;
+            margin-bottom: 20px;
+        }
+
+        /* 数据流可视化条 */
+        .data-pulse {
+            background: #001c28;
+            border-radius: 40px;
+            padding: 35px;
+            margin: 60px 0;
+            border: 1px solid #00ccff40;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pulse-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .metrics-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+        }
+
+        .metric-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #00f2ff;
+            text-shadow: 0 0 8px cyan;
+        }
+
+        /* 学术 & 出诊混合区 */
+        .split-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        @media (max-width: 800px) {
+            .split-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-block {
+            background: rgba(0, 20, 35, 0.6);
+            border-radius: 42px;
+            backdrop-filter: blur(8px);
+            border: 1px solid #00ccff40;
+            padding: 28px;
+        }
+
+        .info-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .clinic-time {
+            background: #0a2a3b;
+            border-radius: 30px;
+            padding: 18px;
+            margin: 15px 0;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .tag-cyber {
+            background: #00aaff20;
+            border: 1px solid #00ccff;
+            border-radius: 60px;
+            padding: 5px 16px;
+            font-size: 0.8rem;
+        }
+
+        /* 患者评价 炫酷滚动 */
+        .review-scroll {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            padding: 15px 5px 30px;
+            scrollbar-width: thin;
+        }
+
+        .review-card {
+            min-width: 280px;
+            background: #0f2538;
+            border-radius: 32px;
+            padding: 24px;
+            border-left: 5px solid #0af;
+        }
+
+        /* 底部 */
+        .footer-cyber {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid #00ccff30;
+            text-align: center;
+            color: #7aa9c4;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 20px;
+            }
+            .hero-left h1 {
+                font-size: 2.8rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-cyber"></div>
+
+<!-- 玻璃导航栏 -->
+<div class="glass-nav">
+    <div class="container nav-flex">
+        <div class="logo">Dr. 阿皂 <span>· 糖尿病逆转中心</span></div>
+        <div class="nav-links">
+            <a href="#home">首页</a>
+            <a href="#tech">核心技术</a>
+            <a href="#academic">学术成果</a>
+            <a href="#clinic">智慧门诊</a>
+            <a href="#contact">AI预诊</a>
+        </div>
+        <a href="#" class="btn-outline-cyber" style="font-size:0.9rem;"><i class="fas fa-microchip"></i> 数字孪生评估</a>
+    </div>
+</div>
+
+<main class="container">
+    <!-- hero 区域 酷炫登场 -->
+    <div id="home" class="hero">
+        <div class="hero-left">
+            <div class="badge-flex">
+                <span class="tech-badge"><i class="fas fa-dna"></i> 精准医学 · 代谢重编程</span>
+                <span class="tech-badge"><i class="fas fa-brain"></i> AI 决策支持</span>
+                <span class="tech-badge"><i class="fas fa-heartbeat"></i> 靶向胰岛功能保护</span>
+            </div>
+            <h1>阿皂 · 糖尿病逆转<br>精准诊疗体系</h1>
+            <div class="tagline">
+                从「控糖」到「逆转」—— 基于多组学与闭环管理，让患者回归健康轨道。
+            </div>
+            <div>
+                <a href="#" class="btn-glow"><i class="fas fa-calendar-alt"></i> 智慧门诊预约</a>
+                <a href="#" class="btn-outline-cyber" style="margin-left: 18px;"><i class="fas fa-chart-line"></i> 动态血糖预测</a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div style="font-size: 1rem; color:#7cc9ff;">⚡ 实时代谢云图 · 阿皂医生糖尿病数字疗法</div>
+            <div class="glow-text" style="margin: 15px 0;">2型糖尿病缓解率 <span style="font-size: 3rem;">↑68%</span></div>
+            <div class="digital-stats">
+                <div><i class="fas fa-user-md"></i> 干预患者<br><strong>2200+</strong></div>
+                <div><i class="fas fa-chart-simple"></i> 糖化达标<br><strong>89%</strong></div>
+                <div><i class="fas fa-microscope"></i> 前沿临床研究<br><strong>12项</strong></div>
+            </div>
+            <hr style="margin: 20px 0; border-color: #00ccff30;">
+            <p style="font-size: 0.85rem;"><i class="fas fa-robot"></i> 基于连续血糖监测+强化生活方式干预，突破传统治疗瓶颈。</p>
+        </div>
+    </div>
+
+    <!-- 核心专长 科技感模块 -->
+    <div id="tech">
+        <div class="section-title">⚡ 核心技术 · 多维控糖矩阵</div>
+        <div class="grid-cards">
+            <div class="tech-card">
+                <div class="card-icon"><i class="fas fa-chart-network"></i></div>
+                <h3>闭环胰岛素智能决策</h3>
+                <p>集成CGMS实时数据与AI算法，精准预测血糖波动，自动优化胰岛素泵基础率，减少低血糖风险67%。</p>
+                <div class="tag-cyber" style="display: inline-block;">#人工胰腺算法</div>
+            </div>
+            <div class="tech-card">
+                <div class="card-icon"><i class="fas fa-microbiome"></i></div>
+                <h3>肠道菌群-代谢重塑</h3>
+                <p>基于宏基因组测序，靶向调节肠-胰岛轴，通过个体化益生元/后生元干预，提升胰岛素敏感性。</p>
+                <div class="tag-cyber" style="display: inline-block;">#微生态疗法</div>
+            </div>
+            <div class="tech-card">
+                <div class="card-icon"><i class="fas fa-dna"></i></div>
+                <h3>药物基因组学指导</h3>
+                <p>检测糖尿病相关药物代谢基因型，优化二甲双胍、SGLT-2及GLP-1RA精准用药，降低不良反应。</p>
+                <div class="tag-cyber" style="display: inline-block;">#个性化用药</div>
+            </div>
+            <div class="tech-card">
+                <div class="card-icon"><i class="fas fa-weight-scale"></i></div>
+                <h3>低碳医学+代谢手术评估</h3>
+                <p>结合减重与代谢管理，为肥胖相关2型糖尿病提供分阶段逆转路径，长期缓解率领先。</p>
+                <div class="tag-cyber" style="display: inline-block;">#代谢手术咨询</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 动态数据看板 视觉冲击 -->
+    <div class="data-pulse">
+        <div class="pulse-title"><i class="fas fa-chart-line"></i> 阿皂糖尿病逆转中心 · 真实世界证据</div>
+        <div class="metrics-row">
+            <div class="metric-item"><div class="metric-number">1,247</div><div>停药缓解病例</div></div>
+            <div class="metric-item"><div class="metric-number">-1.8%</div><div>平均HbA1c降幅</div></div>
+            <div class="metric-item"><div class="metric-number">94%</div><div>患者满意度</div></div>
+            <div class="metric-item"><div class="metric-number">36项</div><div>国际会议交流</div></div>
+        </div>
+    </div>
+
+    <!-- 学术思想 + 创新研究 -->
+    <div id="academic">
+        <div class="section-title">📡 学术思想 · 数字医学与极简治疗哲学</div>
+        <div class="split-panel">
+            <div class="info-block">
+                <h3><i class="fas fa-microchip"></i> 精于数 · 简于道</h3>
+                <p>阿皂医生将糖尿病管理解构为「数据驱动-核心靶点干预」体系，她提出“代谢极简主义”：利用可穿戴设备和强化生活方式，让复杂的病理生理还原为可量化的生物标志物，减少多重用药负担，聚焦胰岛功能保护。创新「皂角动态控糖法」被收录于国际糖尿病联盟年度技术报告。</p>
+                <div class="tag-list">
+                    <span class="tag-cyber">#代谢极简主义</span>
+                    <span class="tag-cyber">#数字化糖尿病学</span>
+                    <span class="tag-cyber">#真实世界研究</span>
+                </div>
+            </div>
+            <div class="info-block">
+                <h3><i class="fas fa-flask"></i> 临床科研落地</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 12px;">✅ 主持国家自然科学基金面上项目「人工智能辅助血糖闭环决策系统」</li>
+                    <li style="margin-bottom: 12px;">✅ 《柳叶刀-数字医疗》发表论文：低碳饮食联合CGM的随机对照研究</li>
+                    <li style="margin-bottom: 12px;">✅ 牵头制定《糖尿病数字疗法中国专家共识2025》</li>
+                    <li>✅ 糖尿病缓解预测模型AUC 0.91，被多个三甲医院引进</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 智慧出诊信息 + 预约创新 -->
+    <div id="clinic">
+        <div class="section-title">🩺 智慧门诊 · 全时空诊疗</div>
+        <div class="split-panel">
+            <div class="info-block">
+                <h3><i class="fas fa-map-marker-alt"></i> 线下 · 数字融合门诊</h3>
+                <div class="clinic-time">
+                    <i class="fas fa-clock"></i> <strong>专家门诊</strong>：每周二 上午 08:30-12:00（糖尿病逆转专病）<br>
+                    <i class="fas fa-star-of-life"></i> <strong>特需·数字疗法门诊</strong>：每周四 下午 14:00-17:00（限号10人，深度CGM解读）<br>
+                    <i class="fas fa-laptop-medical"></i> <strong>远程动态会诊</strong>：每日线上问诊 + AI血糖报告解读
+                </div>
+                <div><i class="fas fa-hospital"></i> 华中科技大学同济医学院附属同济医院 · 内分泌科/糖尿病精准诊疗中心</div>
+                <div class="tag-list">
+                    <span class="tag-cyber"><i class="fas fa-qrcode"></i> 扫码预约动态血糖评估</span>
+                    <span class="tag-cyber"><i class="fab fa-weixin"></i> 微信小程序「阿皂控糖助手」</span>
+                </div>
+                <a href="#" class="btn-glow" style="margin-top: 20px; display: inline-block;"><i class="fas fa-robot"></i> 智能分诊 · AI预评估</a>
+            </div>
+            <div class="info-block">
+                <h3><i class="fas fa-vr-cardboard"></i> 虚实结合 · 数字化患教</h3>
+                <p>沉浸式代谢管理课程：每月发布《皂角控糖元宇宙公开课》，结合VR饮食模拟与运动处方，患者在线参与完成结构化教育。累计覆盖超 8000 名糖尿病患者，依从性提升 62%。</p>
+                <div class="metric-item" style="text-align:left; margin-top:10px;"><span class="metric-number" style="font-size:1.8rem;">📱 闭环管理平台</span> <br>实时上传血糖/饮食/运动，AI生成周报</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 炫酷患者评价与科技体验 -->
+    <div>
+        <div class="section-title"><i class="fas fa-comment-dots"></i> 逆转见证 · 数字疗愈实录</div>
+        <div class="review-scroll">
+            <div class="review-card">
+                <i class="fas fa-quote-left" style="color: #0af;"></i>
+                <p style="margin: 12px 0;">“阿皂医生的数字化管理让我彻底摆脱了每天4次胰岛素注射，糖化从9.6%降到6.1%，太神奇了！”</p>
+                <div>— 刘先生，2型糖尿病10年</div>
+            </div>
+            <div class="review-card">
+                <i class="fas fa-quote-left" style="color: #0af;"></i>
+                <p style="margin: 12px 0;">“动态血糖仪+人工智能决策，夜间低血糖完全消失，真正让科技守护健康。”</p>
+                <div>— 李女士，1型糖尿病</div>
+            </div>
+            <div class="review-card">
+                <i class="fas fa-quote-left" style="color: #0af;"></i>
+                <p style="margin: 12px 0;">“肠道菌群方案让我停药后体重下降15kg，逆转效果超出预期！”</p>
+                <div>— 陈先生，肥胖相关糖尿病</div>
+            </div>
+            <div class="review-card">
+                <i class="fas fa-quote-left" style="color: #0af;"></i>
+                <p style="margin: 12px 0;">“预约特需门诊后，阿皂医生给了我详细的数字疗法处方，半年后停用所有降糖药。”</p>
+                <div>— 张女士，糖化达标2年</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 科研成果数字墙 & 荣誉 -->
+    <div style="margin: 70px 0 20px;">
+        <div class="section-title">🏆 科研·荣誉·全球影响</div>
+        <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(260px,1fr));">
+            <div class="tech-card"><i class="fas fa-globe"></i><h3>国际学术任职</h3> IDF糖尿病数字健康工作组委员 / ADA 技术委员会特邀专家</div>
+            <div class="tech-card"><i class="fas fa-trophy"></i><h3>科技奖项</h3> 2025年中华医学会糖尿病学分会“创新技术杰出青年奖”<br>湖北省科技进步一等奖（糖尿病智慧管理）</div>
+            <div class="tech-card"><i class="fas fa-chart-simple"></i><h3>专利与软著</h3> 基于强化学习的胰岛素决策系统专利5项，糖尿病数字疗法软件著作权3项</div>
+        </div>
+    </div>
+
+    <!-- 最后 联系与预约浮层 -->
+    <div id="contact" style="background: rgba(0, 150, 200, 0.1); border-radius: 60px; padding: 40px; margin: 50px 0; backdrop-filter: blur(12px);">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 25px;">
+            <div>
+                <h2 style="font-size: 2rem;"><i class="fas fa-brain"></i> 开启糖尿病数字逆转之旅</h2>
+                <p>AI预问诊 · 动态代谢评估 · 专家1对1定制方案</p>
+                <div class="tag-list" style="margin-top: 15px;">
+                    <span class="tag-cyber"><i class="fas fa-phone-alt"></i> 027-8366XXXX 转糖尿病数字中心</span>
+                    <span class="tag-cyber"><i class="fab fa-dingtalk"></i> 阿皂医生·控糖助手企业微信</span>
+                </div>
+            </div>
+            <a href="#" class="btn-glow" style="font-size: 1.2rem; padding: 16px 38px;"><i class="fas fa-chalkboard-user"></i> 立即预约 · 数字疗法评估</a>
+        </div>
+    </div>
+
+    <!-- 底部 炫酷简洁 -->
+    <div class="footer-cyber">
+        <p><i class="fas fa-copyright"></i> 阿皂 · 糖尿病精准诊疗中心 | 华中科技大学同济医学院附属同济医院 | 科技逆转代谢未来</p>
+        <p style="font-size: 0.8rem;">基于闭环医疗数据 & 个体化治疗，本网站信息仅供参考，具体诊疗请遵医嘱。</p>
+    </div>
+</main>
+
+<!-- 平滑滚动 提升交互 -->
+<script>
+    document.querySelectorAll('.nav-links a, .btn-glow, .btn-outline-cyber').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const hash = this.getAttribute('href');
+            if(hash && hash !== '#' && hash.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(hash);
+                if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
