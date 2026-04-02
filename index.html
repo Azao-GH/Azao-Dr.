@@ -604,7 +604,7 @@
     // 用户第一次点击页面任意位置时播放音乐
     document.addEventListener('click', function playMusic() {
         const music = document.getElementById('bg-music');
-        if (music && music.paused) {
+        if (music.paused) {
             music.play().catch(e => console.log('播放失败:', e));
         }
         // 只执行一次，移除监听器
@@ -612,9 +612,9 @@
     }, { once: true }); // { once: true } 确保只执行一次
 </script>
 <!-- 以下代码请放入前端html文件的body内 -->
-<script src="https://agi-dev-platform-web.cdn.bcebos.com/ai_apaas/embed/output/embedLiteSDK.js?responseExpires=0&t=1775116671824"></script>
+<script src="https://agi-dev-platform-web.cdn.bcebos.com/ai_apaas/embed/output/embedLiteSDK.js?responseExpires=0&t=1775128571629"></script>
 <script>
-   new EmbedLiteSDK({appId: 'b783a124-9987-49d6-b7c8-83ea467d696a', code: 'embed9vLm58ak1mB6Wuoqng9I'});
+   new EmbedLiteSDK({appId: 'b783a124-9987-49d6-b7c8-83ea467d696a', code: 'embed8VlT4Z0ttCNU7rOzlDVG'});
 </script>
 </body>
 </html>
