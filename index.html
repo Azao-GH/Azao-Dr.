@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿皂医生 · 综合简介 | 同济医院心外科</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f5f9fc 0%, #eef2f7 100%);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: #1e2b3a;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            max-width: 1100px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 42px;
+            box-shadow: 0 30px 60px -20px rgba(0,40,60,0.25), 0 8px 20px -8px rgba(0,70,100,0.15), inset 0 1px 1px rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.5);
+            overflow: hidden;
+        }
+
+        /* 照片预留位 - 姓名旁边的圆形头像 */
+        .photo-placeholder {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #d9e9f2, #c5ddec);
+            margin-right: 15px;
+            vertical-align: middle;
+            border: 3px solid white;
+            box-shadow: 0 6px 14px rgba(0,60,90,0.25);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .photo-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 18px rgba(0,70,110,0.3);
+        }
+
+/*
+        .photo-placeholder::after {
+            content: "📷";
+            font-size: 1.8rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.6;
+            color: #1b5e7a;
+        }
+*/
+
+        /* 当您插入照片后，请添加以下样式到photo-placeholder：
+           background-image: url('您的照片路径');
+           background-size: cover;
+           background-position: center;
+           并删除::after伪元素的内容
+        */
+
+        .hero {
+            padding: 2.5rem 2.5rem 0.5rem 2.5rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "❤️‍🩹";
+            font-size: 8rem;
+            opacity: 0.03;
+            position: absolute;
+            right: 2rem;
+            top: -0.5rem;
+            transform: rotate(8deg);
+            pointer-events: none;
+        }
+
+        .name-title {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.5rem;
+        }
+
+        .name-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .name {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(130deg, #0b3954, #1b5e7a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .badge {
+            background: #d2e6f0;
+            color: #0a4b66;
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #b3d5e8;
+            box-shadow: inset 0 1px 3px white;
+            white-space: nowrap;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #3b5f74;
+            margin-top: 0.4rem;
+            border-left: 4px solid #78b7d4;
+            padding-left: 1.2rem;
+            background: rgba(120, 183, 212, 0.05);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .quick-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+            margin-top: 1.8rem;
+            background: #f1f8fd;
+            padding: 1.2rem 1.8rem;
+            border-radius: 40px;
+            border: 1px solid #cde3f0;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #1b4d66;
+        }
+
+        .quick-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quick-info i { 
+            font-style: normal; 
+            font-size: 1.2rem; 
+        }
+
+        /* 导航模块 */
+        .nav-modules {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 2.5rem 1rem 2.5rem;
+            justify-content: center;
+        }
+
+        .nav-item {
+            flex: 1 1 180px;
+            background: #ffffffd0;
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            border: 2px solid rgba(120, 183, 212, 0.3);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            box-shadow: 0 8px 16px -12px #1b5e7a;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-4px);
+            border-color: #4091b9;
+            background: white;
+            box-shadow: 0 16px 24px -16px #0b3954;
+        }
+
+        .nav-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #0b3954;
+        }
+
+        .nav-desc {
+            font-size: 0.8rem;
+            color: #3b6a84;
+            margin-top: 0.2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            padding: 1.2rem 2.5rem 2.2rem 2.5rem;
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: 1fr;
+                padding: 1rem 1.8rem 2rem 1.8rem;
+            }
+            .hero { padding: 1.8rem 1.8rem 0.2rem 1.8rem; }
+            .name { font-size: 2.5rem; }
+            .nav-modules { margin: 1.5rem 1.8rem; }
+            .photo-placeholder {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .section {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 12px 20px -12px rgba(0,50,70,0.2);
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.8);
+            border-color: #c7ddec;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px dashed #b9d5e9;
+            padding-bottom: 0.7rem;
+        }
+
+        .section-header .emoji {
+            font-size: 2rem;
+            line-height: 1;
+            background: #e3f0f8;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #0b4b6b;
+            letter-spacing: -0.01em;
+        }
+
+        .stitch-method {
+            background: #e5f1f9;
+            border-radius: 24px;
+            padding: 1.2rem 1.4rem;
+            margin: 1.2rem 0 0.8rem 0;
+            border-left: 6px solid #4091b9;
+            box-shadow: inset 0 1px 4px #d4ebf7;
+        }
+
+        .stitch-method h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #175873;
+        }
+
+        .stitch-method h3 span {
+            background: #fff1bb;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4a3b0e;
+        }
+
+        .clinic-row {
+            background: #e9f2f9;
+            border-radius: 18px;
+            padding: 0.9rem 1.2rem;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        .clinic-row p {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.4rem 0;
+        }
+
+        .academic-thought {
+            font-style: italic;
+            background: #f4fbfe;
+            border-radius: 20px;
+            padding: 1.3rem;
+            margin: 1.2rem 0 0 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px dotted #c3ddec;
+            margin: 0.8rem 0;
+        }
+
+        .section-footer {
+            margin-top: auto;
+            padding-top: 1.2rem;
+            text-align: right;
+        }
+
+        .jump-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #e3f0f8;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0b4b6b;
+            text-decoration: none;
+            border: 1px solid #b3d5e8;
+            transition: all 0.15s;
+        }
+
+        .jump-link:hover {
+            background: #4091b9;
+            color: white;
+            border-color: #2a6d8f;
+        }
+
+        .jump-link:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .arrow {
+            transition: transform 0.15s;
+            font-size: 1.2rem;
+        }
+
+        .footnote {
+            font-size: 0.9rem;
+            color: #3e6077;
+            background: #f8fbfe;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 2.5rem 1rem 2.5rem;
+            border: 1px solid #c7ddee;
+            text-align: center;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 1rem 2.5rem 2rem 2.5rem;
+            font-size: 0.8rem;
+            color: #678ea2;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin-top: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- 头部 -->
+        <div class="hero">
+            <div class="name-title">
+                <div class="name-wrapper">
+                    <!-- 
+                        =============================================
+                        照片预留位：姓名旁边的圆形头像
+                        =============================================
+                        插入照片方法：
+                        1. 将您的照片文件放在和本网页同一个文件夹内
+                        2. 将下面的photo-placeholder替换为：
+                        
+                        <div class="photo-placeholder" style="background-image: url('您的照片文件名.jpg'); background-size: cover; background-position: center;"></div>
+                        
+                        3. 删除photo-placeholder原有的::after伪元素样式
+                           可以通过添加内联样式覆盖，或者修改CSS
+                           最简单的方法是添加内联style并删除相机图标
+                        
+                        示例：如果照片文件名为 "azao.jpg"
+                        <div class="photo-placeholder" style="background-image: url('azao.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                        
+                        注意：如果照片太大，可能需要调整background-size
+                    -->
+                    <div class="photo-placeholder" style="background-image: url('pro photo.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                    <span class="name">阿皂 医生</span>
+                </div>
+                <span class="badge">副主任医师 · 硕导</span>
+                <span class="badge">心外-麻醉复合背景</span>
+            </div>
+            <div class="subhead">
+                华中科技大学同济医学院附属同济医院 · 心脏大血管外科
+            </div>
+            <div class="quick-info">
+                <span><i>🎓</i> 华科麻醉学本科 · 心外硕博</span>
+                <span><i>🏥</i> 同济医院 心脏大血管外科</span>
+                <span><i>📄</i> 多篇核心期刊 · 国自然主持</span>
+                <span><i>🪡</i> “皂角缝合法” 首创者</span>
+            </div>
+        </div>
+
+        <!-- 四模块导航栏 -->
+        <div class="nav-modules">
+            <a href="professional intro.html" class="nav-item" target="_blank">
+                <div class="nav-icon">📋</div>
+                <div class="nav-title">专业简介</div>
+                <div class="nav-desc">教育背景 · 履历 · 寄语</div>
+            </a>
+            <a href="capabilities.html" class="nav-item" target="_blank">
+                <div class="nav-icon">🪡</div>
+                <div class="nav-title">核心专长</div>
+                <div class="nav-desc">手术体系 · 创新技术 · 围术期管理</div>
+            </a>
+            <a href="contact.html" class="nav-item" target="_blank">
+                <div class="nav-icon">📅</div>
+                <div class="nav-title">出诊信息</div>
+                <div class="nav-desc">门诊时间 · 地点 · 预约渠道</div>
+            </a>
+            <a href="academic.html" class="nav-item" target="_blank">
+                <div class="nav-icon">💭</div>
+                <div class="nav-title">学术思想</div>
+                <div class="nav-desc">极简主义 · 全域视角 · 落地科研</div>
+            </a>
+        </div>
+
+        <!-- 网格内容 -->
+        <div class="grid">
+            <!-- 专业简介卡片 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="emoji">📋</div>
+                    <h2>专业简介</h2>
+                </div>
+                <p style="font-weight: 500; margin-bottom: 0.8rem;"><strong>麻醉 · 外科 · 重症 · 创新</strong></p>
+                <p>阿皂医生拥有完整的华中科技大学医学教育体系背景，先后获得麻醉学学士、心脏外科学临床医学硕士及博士学位。这种“麻醉+外科”的双重背景，使她在围手术期重症监护与精准外科操作之间建立了独特的桥梁视角。</p>
+                <p style="margin-top: 0.8rem;">现为华中科技大学同济医学院附属同济医院心脏大血管外科副主任医师、副研究员，硕士研究生导师。</p>
+                <div style="margin-top: 1rem; background: #ddeff8; border-radius: 50px; padding: 0.4rem 1rem; font-size:0.9rem;">
+                    💡 冠心病、心脏瓣膜病、大血管疾病
+                </div>
+                <div class="section-footer">
+                    <a href="professional intro.html" class="jump-link" target="_blank">
+                        <span>查看完整专业简介</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 核心专长卡片 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="emoji">🪡</div>
+                    <h2>核心专长</h2>
+                </div>
+                <p><strong>复杂心脏外科手术</strong> —— 非体外循环冠脉搭桥、保留瓣膜的瓣膜置换、主动脉根部手术。稳健精准，术后恢复周期短。</p>
+                
+                <div class="stitch-method">
+                    <h3>
+                        “皂角缝合法” 
+                        <span>原创 · 简单易学 · 疤痕微小</span>
+                    </h3>
+                    <div class="stitch-desc">
+                        <p>✨ <strong>技术特点：</strong>颠覆传统心血管吻合流程，力学分布均匀，对合整齐、张力均匀。</p>
+                        <p>✨ <strong>临床优势：</strong>极大降低吻合口漏血风险，缝线留存少，愈后疤痕纤细平整。</p>
+                        <p>✨ <strong>行业影响：</strong>因“简单易学、效果确切”，被广大医学生及基层医院学习使用，编入多所院校辅助教材。</p>
+                    </div>
+                </div>
+                
+                <p><strong>围手术期脏器保护</strong> —— 擅长重症超声、血流动力学监测，尤其在高龄高危患者术后心功能恢复方面经验丰富。</p>
+                <div class="section-footer">
+                    <a href="capabilities.html" class="jump-link" target="_blank">
+                        <span>查看完整核心专长</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 出诊信息卡片 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="emoji">📅</div>
+                    <h2>出诊信息</h2>
+                </div>
+                <div class="clinic-row">
+                    <p><span>📌</span> <strong>专家门诊：</strong>每周二上午 (主院区门诊三楼心外科)</p>
+                    <p><span>📌</span> <strong>特需/会诊：</strong>每周四下午 (心外科疑难病会诊)</p>
+                </div>
+                <p style="font-size:0.9rem; margin:0.2rem 0 0.8rem 0;">⚠️ 由于手术日密集，门诊时间偶有微调，建议通过医院官方公众号或致电查询。</p>
+                <p style="font-size:0.9rem;">急危重症可前往外科大楼20楼心外科病区。</p>
+                <hr>
+                <div style="display:flex; justify-content: space-between; align-items:center; margin-top:0.5rem;">
+                    <span style="background:#e7f2f9; padding:0.2rem 1rem; border-radius:40px;">同济医院主院区</span>
+                    <span style="background:transparent; border:1px solid #77b3d6; padding:0.2rem 1rem; border-radius:40px; color:#176185; font-size:0.85rem;">预约挂号</span>
+                </div>
+                <div class="section-footer">
+                    <a href="contact.html" class="jump-link" target="_blank">
+                        <span>查看详细出诊指引</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 学术思想卡片 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="emoji">💭</div>
+                    <h2>学术思想</h2>
+                </div>
+                <div class="academic-thought">
+                    <p><strong>精于技 · 简于道 · 归于人</strong></p>
+                    <p><span style="font-weight:600;">外科技术的“极简主义”：</span>最顶级的外科技术应当回归解剖本源，正如“皂角缝合法”所体现的，用最少的操作步骤解决最核心的问题。</p>
+                    <p><span style="font-weight:600;">交叉融合的“全域视角”：</span>倡导打破麻醉、手术、ICU的界限，从患者入院到康复的全链条优化。</p>
+                    <p><span style="font-weight:600;">临床科研的“落地导向”：</span>所有研究最终回到患者床边。核心是为了提升患者远期生活质量。</p>
+                </div>
+                <div style="margin-top:0.8rem; font-size:0.95rem; color:#165974; border-left:3px solid #8bbcdb; padding-left:1rem;">
+                    “真正的创新来自于对复杂流程的深度解构与重构”
+                </div>
+                <div class="section-footer">
+                    <a href="academic.html" class="jump-link" target="_blank">
+                        <span>查看完整学术思想</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 学术任职与科研荣誉 -->
+        <div style="padding:0 2.5rem 0.5rem 2.5rem;">
+            <div style="background: #ffffffc9; border-radius: 30px; padding: 1.2rem 1.8rem; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; border:1px solid #d6e8f2;">
+                <div>
+                    <div style="font-weight:600; margin-bottom:0.3rem;">📚 主要学术任职</div>
+                    <ul style="list-style-type: none; font-size:0.9rem;">
+                        <li>• 中华医学会胸心血管外科学分会青年委员</li>
+                        <li>• 湖北省微循环学会心脏大血管专业委员会常务委员</li>
+                        <li>• 《临床心血管病杂志》青年编委</li>
+                    </ul>
+                </div>
+                <div>
+                    <div style="font-weight:600; margin-bottom:0.3rem;">🏆 科研与获奖</div>
+                    <ul style="list-style-type: none; font-size:0.9rem;">
+                        <li>• 主持国家自然科学基金青年/面上项目2项</li>
+                        <li>• 第一/通讯作者SCI论文15篇 (JCR一区5篇)</li>
+                        <li>• 湖北省科技进步二等奖 · 同济医院临床技术创新奖</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一段话总结 -->
+        <div class="footnote">
+            <span style="font-weight:600;">🧑‍⚕️ 一段话总结 · 阿皂医生</span><br>
+            阿皂医生是华中科技大学同济医学院培养的“麻醉-心外”复合型人才，现任同济医院心脏大血管外科副主任医师。她不仅在冠心病与瓣膜病的外科治疗上技艺精湛，更凭借深厚的临床科研底蕴，开创了以“简单易学、疤痕微小”著称的“皂角缝合法”，为心外科技术的普及与微创化做出了原创性贡献。其学术思想融合外科极简主义与围手术期整体观，在临床与科研之间架起了一座务实创新的桥梁。
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer-note">
+            🌿 严谨 · 精进 · 仁心  ——  点击上方模块查看详细内容 · 最新更新 · 同济医院心外科
+        </div>
+    </div>
+<!-- 背景音乐（用户点击后播放） -->
+<audio id="bg-music" loop style="display: none;">
+    <source src="music.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放
+</audio>
+
+<script>
+    // 用户第一次点击页面任意位置时播放音乐
+    document.addEventListener('click', function playMusic() {
+        const music = document.getElementById('bg-music');
+        if (music.paused) {
+            music.play().catch(e => console.log('播放失败:', e));
+        }
+        // 只执行一次，移除监听器
+        document.removeEventListener('click', playMusic);
+    }, { once: true }); // { once: true } 确保只执行一次
+</script>
+</body>
+</html>
